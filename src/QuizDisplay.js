@@ -50,8 +50,7 @@ class QuizDisplay extends Renderer {
     if (this.model.asked.length === 0) {
       // Quiz has not started
       html = this._generateIntro();
-    } 
-    if (this.model.active === true){
+    } else {
       html = this._generateQuiz();
     }
     
@@ -61,13 +60,17 @@ class QuizDisplay extends Renderer {
   handleStart() {
     this.model.startGame();
   }
+  
 
 
   handleSubmit(){
     event.preventDefault();
     const answer = event.target.answer.value;
     console.log(answer);
-    
+    this.model.answerCurrentQuestion(answer);
+    this.model.nextQuestion();
+    this.model.update();
+
   }
 
   
