@@ -1,22 +1,15 @@
 import $ from 'jquery';
 import Renderer from './lib/Renderer';
 
+
 class QuizDisplay extends Renderer {
   getEvents() {
     return {
       'click .start-quiz': 'handleStart',
+      'submit .submit-answer': 'handleSubmit',
     };
   }
 
-  _generateQuiz(){
-      return `
-        <div>
-          <p>
-            ${this.model.asked[0].text}
-          </p>
-        </div>
-      `;
-  }
 
   _generateIntro() {
     return `
@@ -33,6 +26,23 @@ class QuizDisplay extends Renderer {
       </div>
     `;
   }
+
+  _generateQuiz(){
+    return `
+      <div>
+        <p>${this.model.asked[0].text}</p>
+        <p>
+        <form role="form" class="submit-answer">
+        <input class="answer" type="radio" name="answer" value="${this.model.asked[0].answers[0]}"/> ${this.model.asked[0].answers[0]}<br>
+        <input class="answer" type="radio" name="answer" value="${this.model.asked[0].answers[1]}"/> ${this.model.asked[0].answers[1]}<br>
+        <input class="answer" type="radio" name="answer" value="${this.model.asked[0].answers[2]}"/> ${this.model.asked[0].answers[2]}<br>
+        <input class="answer" type="radio" name="answer" value="${this.model.asked[0].answers[3]}"/> ${this.model.asked[0].answers[3]}<br>
+        <button type="submit" value="Submit">Submit</button>
+        </form>
+        </p>
+      </div>
+    `;
+}
 
   template() {
     let html = '';
@@ -51,6 +61,16 @@ class QuizDisplay extends Renderer {
   handleStart() {
     this.model.startGame();
   }
+
+
+  handleSubmit(){
+    event.preventDefault();
+    const answer = event.target.answer.value;
+    console.log(answer);
+    
+  }
+
+  
 }
 
 export default QuizDisplay;

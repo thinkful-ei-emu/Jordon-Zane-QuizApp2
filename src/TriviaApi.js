@@ -1,5 +1,5 @@
 class TriviaApi {
-  static BASE_URL = 'https://opentdb.com/api.php';
+  static BASE_URL = 'https://opentdb.com/api.php?type=multiple';
 
   //Fetch
   fetchQuestions(count) {
