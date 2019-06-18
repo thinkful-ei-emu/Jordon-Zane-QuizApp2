@@ -14,7 +14,7 @@ function main() {
   //   .then(arr=>arr.map(item=>new Question(item.question,item.incorrect_answers,item.correct_answer)))
   //   .then(classArray=>classArray.forEach(item=>q.getQuestionData(item)));
     
-  q.startGame();
+ 
 
   
 

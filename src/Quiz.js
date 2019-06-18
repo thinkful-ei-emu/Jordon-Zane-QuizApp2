@@ -1,70 +1,79 @@
 import Question from './Question';
-import TriviaApi from'./TriviaApi';
+import TriviaApi from './TriviaApi';
 
 class Quiz {
 
   static DEFAULT_QUIZ_LENGTH = 2;
-  
+
   constructor() {
     // Array of Question instances
     this.unasked = [];
     // Array of Question instances
     this.asked = [];
     this.active = false;
-    this.api= new TriviaApi(5);
-    
-
 
     // TASK: Add more props here per the exercise
-
-    this.score=0;
-    this.score=[];
+    this.score = 0;
+    this.scoreHistory = [];
 
   }
 
   // Example method:
   startGame() {
-    this.active = true;
-    this.api.getItems ()
-    .then(res=>res.json())
-    .then(jsonData=>jsonData.results)
-    .then(arr=>arr.map(item=>new Question(item.question,item.incorrect_answers,item.correct_answer)))
-    .then(classArray=>classArray.forEach(item=>this.getQuestionData(item)))
-    .then(()=>this.nextQuestion());
+    this.unasked = [];
+    this.asked = [];
+    this.active = false;
+    this.score = 0;
 
-   
-    console.log(this.unasked);
-    
-
-    
+    const triviaApi = new TriviaApi();
+    triviaApi.fetchQuestions(Quiz.DEFAULT_QUIZ_LENGTH)
+      .then(data => {
+        data.results.forEach(questionData => {
+          this.unasked.push(new Question(questionData));
+          this.nextQuestion();
+          this.active = true;
+        });
+        console.log(this.unasked);
+        console.log(this.asked);
+      })
+      .catch(err => console.log(err.message));
   }
 
-  endGame(){
-    this.active=false;
+  getCurrentQuestion() {
+    return this.asked[0];
   }
 
-  nextQuestion(){
-    this.asked.push(this.unasked[0]);
-    this.unasked.splice(0,1);
+  nextQuestion() {
+    const currentQ = this.getCurrentQuestion();
+    if (currentQ && currentQ.getAnswerStatus() === -1) {
+      return false;
+    }
 
-    console.log(this.unasked);
-    console.log(this.asked);
+    this.asked.unshift(this.unasked.pop());
+    return true;
   }
-getQuestionData(item){
 
-  this.unasked.push(item)
+  increaseScore() {
+    this.score++;    
+  }
 
+  answerCurrentQuestion(answerText) {
+    const currentQ = this.getCurrentQuestion();
+    // Cannot find current question, so fail to answer
+    if (!currentQ) return false;
+    // Current question has already been answered, so refuse to submit new answer    
+    if (currentQ.getAnswerStatus() !== -1) return false;
 
+    // Otherwise, submit the answer
+    currentQ.submitAnswer(answerText);
 
+    // If correct, increase score
+    if (currentQ.getAnswerStatus() === 1) {
+      this.increaseScore();
+    }
+
+    return true;
+  }
 }
-
-keepScore(){
-  
-}
-}
-
-
-
-
 
 export default Quiz;
