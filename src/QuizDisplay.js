@@ -70,7 +70,6 @@ class QuizDisplay extends Renderer {
     this.model.answerCurrentQuestion(answer);
     this.model.nextQuestion();
     this.model.update();
-
   }
 
   

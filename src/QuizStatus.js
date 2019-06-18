@@ -13,9 +13,19 @@ class QuizStatus extends Renderer {
       <div>
       <p>Score: ${score}</p>
       <p>High Score: ${history}</p>
-      <p>Progress: </p>
+      <p>Progress: ${this.gameProgress()}</p>
       </div>
     `;
+  }
+
+  gameProgress(){
+    let currentProgress;
+    if(this.model.asked.length === 0){
+      currentProgress = "Game Ended";
+  } else {
+    currentProgress = `${this.model.asked.length} of 5`;
+  }
+  return currentProgress;
   }
 }
 
