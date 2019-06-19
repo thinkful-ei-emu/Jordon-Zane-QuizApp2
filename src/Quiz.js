@@ -4,7 +4,7 @@ import Model from './lib/Model';
 
 class Quiz extends Model{
 
-  static DEFAULT_QUIZ_LENGTH = 2;
+  static DEFAULT_QUIZ_LENGTH = 5;
 
   constructor() {
     super();
@@ -37,10 +37,15 @@ class Quiz extends Model{
           this.nextQuestion();
           this.active = true;
           this.update();
+          console.log(`i am unasked ${JSON.stringify(this.unasked)}`);
+          console.log(`i am asked ${JSON.stringify(this.asked)}`);
         });
       })
       .catch(err => console.log(err.message));
+      
   }
+
+ 
 
   getCurrentQuestion() {
     return this.asked[0];

@@ -13,7 +13,7 @@ class QuizStatus extends Renderer {
       <div>
       <p>Score: ${score}</p>
       <p>High Score: ${history}</p>
-      <p>Progress: </p>
+      <p>Progress: ${this.model.asked.length}of 5 </p>
       </div>
     `;
   }
