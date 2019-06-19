@@ -38,7 +38,7 @@ class Quiz extends Model{
           this.active = true;
           this.update();
           console.log(`i am unasked ${JSON.stringify(this.unasked)}`);
-          console.log(`i am asked ${JSON.stringify(this.asked)}`);
+          console.log(`i am asked ${JSON.stringify(this.asked[0].text)}`);
         });
       })
       .catch(err => console.log(err.message));

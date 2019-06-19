@@ -82,14 +82,14 @@ class QuizDisplay extends Renderer {
     return `
       <div>
         <p>
-          Goog Job!
+          Good Job!
         </p>
         <p>
-          Your final score was ${this.model.score}
+          Your final score was ${this.model.score} out of 5
         </p>
       </div>
       <div class="buttons">
-        <button class="start-quiz">Start Quiz</button>
+        <button class="start-quiz">Play Again?</button>
       </div>
     `;
 
@@ -108,7 +108,7 @@ class QuizDisplay extends Renderer {
       html=this._generateResults();
 
     }
-    if(this.model.asked.length===5&&this.model.active===false  ){
+    if((this.model.asked.length===5)&&this.active===false){
       html=this.generateEndOfGame();
     }
 
@@ -135,11 +135,17 @@ class QuizDisplay extends Renderer {
   }
 
   handleNextQuestion(){
-    if(this.model.unasked.length===0){
-      this.model.active===false;
+    if(this.model.unasked.length===0 && this.model.asked.length===5 &&this.model.active===true ){
+      this.active=false;
+      
+      this.model.update();
+      console.log(this.model.unasked[0].text);
+      
+      
     }
     else{this.model.nextQuestion();
       this.model.update();}
+    console.log(this.model.unasked[this.model.unasked.length-1].text);
   }
 
 }
