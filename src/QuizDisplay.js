@@ -78,7 +78,6 @@ class QuizDisplay extends Renderer {
     `;
   }
 
-<<<<<<< HEAD
   generateEndOfGame(){
     return `
       <div>
@@ -95,29 +94,11 @@ class QuizDisplay extends Renderer {
     `;
 
   }
-=======
-  _generateQuiz(){
-    return `
-      <div>
-        <p>${this.model.asked[0].text}</p>
-        <p>
-        <form role="form" class="submit-answer">
-        <input class="answer" type="radio" name="answer" value="${this.model.asked[0].answers[0]}"/> ${this.model.asked[0].answers[0]}<br>
-        <input class="answer" type="radio" name="answer" value="${this.model.asked[0].answers[1]}"/> ${this.model.asked[0].answers[1]}<br>
-        <input class="answer" type="radio" name="answer" value="${this.model.asked[0].answers[2]}"/> ${this.model.asked[0].answers[2]}<br>
-        <input class="answer" type="radio" name="answer" value="${this.model.asked[0].answers[3]}"/> ${this.model.asked[0].answers[3]}<br>
-        <button type="submit" value="Submit">Submit</button>
-        </form>
-        </p>
-      </div>
-    `;
-}
->>>>>>> 9aadb88fcdb0f82454407c86b226b18f80a8c11b
 
   template() {
     let html = '';
     
-    if (this.model.asked.length === 0) {
+    if (this.model.asked.length === 0&&this.model.unasked.length===0) {
       // Quiz has not started
       html = this._generateIntro();
     } else {
@@ -127,7 +108,7 @@ class QuizDisplay extends Renderer {
       html=this._generateResults();
 
     }
-    if(this.model.unasked.length===0&&this.model.active===false  ){
+    if(this.model.asked.length===5&&this.model.active===false  ){
       html=this.generateEndOfGame();
     }
 
@@ -138,7 +119,6 @@ class QuizDisplay extends Renderer {
   handleStart() {
     this.model.startGame();
   }
-<<<<<<< HEAD
   handleSubmit(e){
     this._generateResults();
     e.preventDefault();
@@ -162,21 +142,6 @@ class QuizDisplay extends Renderer {
       this.model.update();}
   }
 
-=======
-  
-
-
-  handleSubmit(){
-    event.preventDefault();
-    const answer = event.target.answer.value;
-    console.log(answer);
-    this.model.answerCurrentQuestion(answer);
-    this.model.nextQuestion();
-    this.model.update();
-  }
-
-  
->>>>>>> 9aadb88fcdb0f82454407c86b226b18f80a8c11b
 }
 
 
