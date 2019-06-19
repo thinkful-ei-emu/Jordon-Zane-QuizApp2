@@ -16,7 +16,7 @@ class Quiz extends Model{
 
     // TASK: Add more props here per the exercise
     this.score = 0;
-    this.scoreHistory = [];
+    this.scoreHistory = [0];
 
   }
 

@@ -46,7 +46,7 @@ class QuizDisplay extends Renderer {
    <p>
      ${this.model.asked[0].text}
    </p>
-
+<p>You answered: ${this.model.asked[0].userAnswer}</p>
    <p>
      Im sorry that incorrect!<br>
      The correct answer was:${this.model.asked[0].correctAnswer}
