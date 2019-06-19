@@ -108,7 +108,7 @@ class QuizDisplay extends Renderer {
       html=this._generateResults();
 
     }
-    if((this.model.asked.length===5)&&this.active===false){
+    if((this.model.asked.length===5)&&this.model.active===false){
       html=this.generateEndOfGame();
     }
 
@@ -135,17 +135,20 @@ class QuizDisplay extends Renderer {
   }
 
   handleNextQuestion(){
-    if(this.model.unasked.length===0 && this.model.asked.length===5 &&this.model.active===true ){
-      this.active=false;
+   
+    if(this.model.asked.length<5 ){
+      this.model.nextQuestion();
       
-      this.model.update();
-      console.log(this.model.unasked[0].text);
-      
+      //  this.model.update();
+      //onsole.log(this.model.unasked[0].text);
+      console.log(this.model.active);
       
     }
-    else{this.model.nextQuestion();
-      this.model.update();}
-    console.log(this.model.unasked[this.model.unasked.length-1].text);
+    else if(this.model.asked.length===5){
+      this.model.active=false;
+      //this.model.update();
+    }
+    this.model.update();
   }
 
 }

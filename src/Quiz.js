@@ -57,6 +57,7 @@ class Quiz extends Model{
       return false;
     }
     this.asked.unshift(this.unasked.pop());
+    console.log(this.active);
     return true;
   }
 
