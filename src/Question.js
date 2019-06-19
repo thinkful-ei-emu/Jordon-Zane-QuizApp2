@@ -1,4 +1,4 @@
-class Question {
+class Question{
   constructor(questionData) {
     this.text = questionData.question;
     this.answers = [questionData.correct_answer, ...questionData.incorrect_answers];

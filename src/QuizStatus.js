@@ -17,6 +17,16 @@ class QuizStatus extends Renderer {
       </div>
     `;
   }
+
+  gameProgress(){
+    let currentProgress;
+    if(this.model.asked.length === 0){
+      currentProgress = "Game Ended";
+  } else {
+    currentProgress = `${this.model.asked.length} of 5`;
+  }
+  return currentProgress;
+  }
 }
 
 export default QuizStatus;
