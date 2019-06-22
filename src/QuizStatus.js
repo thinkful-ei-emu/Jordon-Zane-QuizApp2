@@ -19,11 +19,11 @@ class QuizStatus extends Renderer {
     `;
   }
   insertHighScore(){
-    console.log('inserHighScoreRan');
-    console.log(this.model.scoreHistory);
+    ////console.log('inserHighScoreRan');
+    ////console.log(this.model.scoreHistory);
     if(this.model.scoreHistory.length===0){
       this.model.scoreHistory.push(this.model.score);
-      console.log('insert High Score Ran');
+      ////console.log('insert High Score Ran');
       
     }
     else if(this.model.score>this.model.scoreHistory[this.model.scoreHistory.length-1]){

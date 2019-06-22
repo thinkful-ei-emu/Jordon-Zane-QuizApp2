@@ -125,10 +125,10 @@ class QuizDisplay extends Renderer {
   handleSubmit(e){
     this._generateResults();
     e.preventDefault();
-    console.log('Rann');
-    console.log(e.target);
+    //console.log('Rann');
+    //console.log(e.target);
     const answer=new FormData(e.target).get('option');
-    console.log(answer);
+    //console.log(answer);
     this.model.answerCurrentQuestion(answer);
     this.model.update();
 
@@ -144,7 +144,7 @@ class QuizDisplay extends Renderer {
       
       //  this.model.update();
       //onsole.log(this.model.unasked[0].text);
-      console.log(this.model.active);
+      //console.log(this.model.active);
       
     }
     else if(this.model.asked.length===5){
