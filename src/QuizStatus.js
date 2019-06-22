@@ -1,4 +1,5 @@
 import Renderer from './lib/Renderer';
+import './index.css';
 
 class QuizStatus extends Renderer {
   template() {
@@ -8,18 +9,26 @@ class QuizStatus extends Renderer {
     //counts question number for progress
     const current = this.model.asked.length;
     const totalQ = this.model.asked.length + this.model.unasked.length;
-
+    this.insertHighScore();
     return `
-      <div>
+      <section class="quizstatus">
       <p>Score: ${score}</p>
-      <p>High Score: ${this.insertHighScore()}</p>
+      <p>High Score: ${this.model.scoreHistory[this.model.scoreHistory.length-1]}</p>
       <p>Progress: ${this.gameProgress()}</p>
-      </div>
+      </section>
     `;
   }
   insertHighScore(){
-    if(this.model.score>this.model.scoreHistory[0]){
-      return this.model.scoreHistory.push(this.model.score);
+    console.log('inserHighScoreRan');
+    console.log(this.model.scoreHistory);
+    if(this.model.scoreHistory.length===0){
+      this.model.scoreHistory.push(this.model.score);
+      console.log('insert High Score Ran');
+      
+    }
+    else if(this.model.score>this.model.scoreHistory[this.model.scoreHistory.length-1]){
+      this.model.scoreHistory.push(this.model.score);
+
     }
   }
 

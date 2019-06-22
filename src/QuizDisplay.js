@@ -13,48 +13,51 @@ class QuizDisplay extends Renderer {
 
   _generateQuiz(){
     return `
-        <form id="form">
-          <p>${this.model.asked[0].text}</p>
-        <input type="radio" name="option" value="${this.model.asked[0].answers[0]}">${this.model.asked[0].answers[0]}<br>
-        <input type="radio" name="option" value="${this.model.asked[0].answers[1]}">${this.model.asked[0].answers[1]}<br>
-        <input type="radio" name="option" value="${this.model.asked[0].answers[2]}">${this.model.asked[0].answers[2]}<br>
-        <input type="radio" name="option" value="${this.model.asked[0].answers[3]}">${this.model.asked[0].answers[3]}<br>
-        <button type="submit" class="submit-button">Submit!</button>
+    <section class="display">    
+      <form id="form">
+          <h2 class="question">${this.model.asked[0].text}</h2>
+        <input type="radio" name="option" class="textdisplay" value="${this.model.asked[0].answers[0]}">${this.model.asked[0].answers[0]}<br>
+        <input type="radio" name="option" class="textdisplay" value="${this.model.asked[0].answers[1]}">${this.model.asked[0].answers[1]}<br>
+        <input type="radio" name="option" class="textdisplay" value="${this.model.asked[0].answers[2]}">${this.model.asked[0].answers[2]}<br>
+        <input type="radio" name="option" class="textdisplay" value="${this.model.asked[0].answers[3]}">${this.model.asked[0].answers[3]}<br>
+        <button type="submit" class="submit-button button">Submit!</button>
         </form>
+        </section>
       `;
   }
 
   _generateResults(){
     if(this.model.getCurrentQuestion().getAnswerStatus()===1){ return `<div>
-   <p>
+   <section class="display">
+    <h2 class="question">
      ${this.model.asked[0].text}
-   </p>
+   </h2>
 
-   <p>
+   <h3 class="correct">
      You got it!<br>
      The correct answer was:${this.model.asked[0].correctAnswer}
      
-   </p>
+   </h3>
+   </section>
  </div>
  <div class="buttons">
-   <button class="next-question">Next Question </button>
+   <button class="next-question button">Next Question </button>
  </div>
    
    `;}
 
     else{return `<div>
-   <p>
+   <h2 class="question">
      ${this.model.asked[0].text}
-   </p>
-<p>You answered: ${this.model.asked[0].userAnswer}</p>
-   <p>
-     Im sorry that incorrect!<br>
-     The correct answer was:${this.model.asked[0].correctAnswer}
+   </h2>
+<h3 class="incorrect">You answered: ${this.model.asked[0].userAnswer}</h3>
+   <h3 class="incorrect"> Im sorry that incorrect!</h3><br>
+    <h3 class="correct"> The correct answer was:${this.model.asked[0].correctAnswer}</h3>
      
-   </p>
+   
  </div>
  <div class="buttons">
-   <button class="next-question">Next Question </button>
+   <button class="next-question button">Next Question </button>
  </div>
    
    `;}
@@ -64,16 +67,16 @@ class QuizDisplay extends Renderer {
 
   _generateIntro() {
     return `
-      <div>
-        <p>
+      <section class="display">
+        <h1>
           Welcome to the Trivia Quiz
-        </p>
+        </h1>
         <p>
           Test your smarts and see how high you can score!
         </p>
-      </div>
+      </section>
       <div class="buttons">
-        <button class="start-quiz">Start Quiz</button>
+        <button class="start-quiz button">Start Quiz</button>
       </div>
     `;
   }
@@ -84,12 +87,12 @@ class QuizDisplay extends Renderer {
         <p>
           Good Job!
         </p>
-        <p>
+        <h3 class="endgame">
           Your final score was ${this.model.score} out of 5
-        </p>
+        </h3>
       </div>
       <div class="buttons">
-        <button class="start-quiz">Play Again?</button>
+        <button class="start-quiz button">Play Again?</button>
       </div>
     `;
 

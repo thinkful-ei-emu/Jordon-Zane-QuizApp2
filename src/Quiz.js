@@ -16,7 +16,7 @@ class Quiz extends Model{
 
     // TASK: Add more props here per the exercise
     this.score = 0;
-    this.scoreHistory = [0];
+    this.scoreHistory = [];
 
   }
 
@@ -37,8 +37,7 @@ class Quiz extends Model{
           this.nextQuestion();
           this.active = true;
           this.update();
-          console.log(`i am unasked ${JSON.stringify(this.unasked)}`);
-          console.log(`i am asked ${JSON.stringify(this.asked[0].text)}`);
+          
         });
       })
       .catch(err => console.log(err.message));
