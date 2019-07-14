@@ -23,10 +23,10 @@
     "webpack-dev-server": "^3.3.1"
   },
   "scripts": {
-    "deploy": "gh-pages -d build",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack-dev-server",
-    "build": "webpack --mode production"
+    "build": "webpack --mode production",
+    "deploy": "npm run build && git subtree push --prefix dist origin gh-pages"
   },
   "repository": {
     "type": "git",
